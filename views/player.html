@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Show Device Status</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="../css/all.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">US College Basketball 2016</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/">Home </a>
+                <a class="nav-item nav-link" href="/players/points">Top Scoring Players</a>
+                <a class="nav-item nav-link" href="/players/rebounds">Top Rebounding Players</a>
+                <a class="nav-item nav-link" href="/venues">Top Attendance Venues</a>
+                <a class="nav-item nav-link " href="/divisions">Divisions</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Primary page content -->
+    <div class="container-fluid">
+        <!-- Catches if the user tries to view a page for a player that does not exist -->
+        <% if (!locals.player) { %>
+        <div class="alert alert-warning" role="alert">
+            There is an error in your input; please try again!
+        </div>
+        <% } 
+    <!-- Otherwise player details render -->
+    else{ %>
+        <br>
+        <div class="card w-50">
+            <div class="card-body">
+                <h1> <%= player.player_name %> </h1>
+                <h5 class="card-title"><%= player.jersey_number %></h5>
+                <th scope="row"></th>
+                <h6 class="card-subtitle mb-2 text-muted"><a href='../team/<%= player.team_id %>'><%= player.market %> <%= player.team_name %></a></h6>
+                <ul class="list-group list-group-flush">                
+                    <li class="list-group-item"><i class="fas fa-basketball icon-offset"></i> Points 
+                        <span style="float:right;">
+                        <%= player.total_points%>
+                        </span> </li>
+                    <li class="list-group-item"><i class="fas fa-chess-board icon-offset"></i> Rebounds 
+                        <span style="float:right;">
+                        <%= player.total_rebounds%>
+                    </span> </li>
+                    <li class="list-group-item"><i class="fas fa-coins icon-offset"></i> Assists
+                        <span style="float:right;">
+                            <%= player.total_assists%>
+                        </span> </li>
+                    <li class="list-group-item"><i class="fas fa-percent icon-offset"></i> Shooting Percentage
+                        <span style="float:right;">
+                            <%= player.shooting_percentage.toFixed(2) %>%
+                        </span> </li>
+                </ul>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+    <!-- jQuery library -->
+    <script language="javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap library -->
+    <script language="javascript" src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

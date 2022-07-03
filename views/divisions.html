@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Devices</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">US College Basketball 2016</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/">Home </a>
+                <a class="nav-item nav-link" href="/players/points">Top Scoring Players</a>
+                <a class="nav-item nav-link" href="/players/rebounds">Top Rebounding Players</a>
+                <a class="nav-item nav-link" href="/venues">Top Attendance Venues</a>
+                <a class="nav-item nav-link active" href="/divisions">Divisions<span class="sr-only"></span></a>
+            </div>
+        </div>
+    </nav>
+    <!-- Primary page content -->
+    <div class="container-fluid">
+        <!-- Surfaces error if any is caught -->
+        <% if (locals.message) { %>
+        <div class="alert alert-<%= message.type %>" role="alert">
+            <%= message.body %>
+        </div>
+        <% } %>
+        <h1> Divisions </h1>
+        <!-- Table containing a row for each venue -->
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% divisions.forEach(function(division) { %>
+                <tr>
+                    
+                    <th scope="row"><a href='../division/<%= division.id %>'><%= division.name %></a></th>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- jQuery library -->
+    <script language="javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap library -->
+    <script language="javascript" src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Team <%= team.team_name %></title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">US College Basketball 2016</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/">Home </a>
+                <a class="nav-item nav-link" href="/players/points">Top Scoring Players</a>
+                <a class="nav-item nav-link" href="/players/rebounds">Top Rebounding Players</a>
+                <a class="nav-item nav-link" href="/venues">Top Attendance Venues</a>
+                <a class="nav-item nav-link " href="/divisions">Divisions</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Primary page content -->
+    <div class="container-fluid">
+        <!-- Catches if the user tries to view a page for a team that does not exist -->
+        <% if (!locals.team) { %>
+        <div class="alert alert-warning" role="alert">
+            There is an error in your input; please try again!
+        </div>
+        <% } 
+    <!-- Otherwise player details render -->
+    else{ %>
+        <br>
+        <div class="card w-50">
+            <div class="card-body">
+                <h1> <%= team.team_name %> </h1>
+                <h5 class="card-title"><%= team.market %> <%= team.team_name %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= team.alias %></h6>
+            </div>
+        </div>
+        <% } %>
+        <br>
+        <h1>Players</h1>
+        <br>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Jersey No</th>
+                    <th scope="col">Total Points</th>
+                    <th scope="col">Total Rebounds</th>
+                    <th scope="col">Total Assists</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% players.forEach(function(player) { %>
+                <tr>
+                    <th scope="row"><a href='../player/<%= player.player_id %>'><%= player.player_name %></a></th>
+                    <td><%= player.jersey_number %></td>
+                    <td><%= player.total_points %></td>
+                    <td><%= player.total_rebounds %></td>
+                    <td><%= player.total_assists %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <!-- jQuery library -->
+    <script language="javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap library -->
+    <script language="javascript" src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
